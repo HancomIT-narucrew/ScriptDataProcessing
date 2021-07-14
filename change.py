@@ -1,8 +1,8 @@
 import re
 
 def modifyScripts():
-    r = open('example.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
-    w = open('example_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
+    r = open('The_Moon_Rising_River.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
+    w = open('The_Moon_Rising_River_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
 
     while True:
         line = r.readline()
@@ -36,26 +36,27 @@ def modifyScripts():
             '\([A-Z].*\)\s',  # [문장] 제거
             '\[[A-Z].*\]\s',  # (문장) 제거
             '^♪\s[A-Z].*',  # '♪' 문장 제거
-            '\-\s'  # '- ' 제거
-            '\#'  # '#' 제거
-            '"'  # " 제거
-            "^(')"  # '문장' '의 제거
-            "\s(')$"
-            '[A-Z].*\:\s'  # '이름:' 제거
+            '\-\s',  # '- ' 제거
+            '\#',  # '#' 제거
+            '"',  # " 제거
+            "^(')",  # '문장' '의 제거
+            "\s(')$",
+            '[A-Z].*\:\s',  # '이름:' 제거
 
             '^\s'  # 공백제거 (제일 나중에 해야함)
         ]
 
         for i in rm_pattern:
-            line = re.sub(pattern=rm_pattern, repl='', string=line)
-            w.write(line)
+            line = re.sub(pattern=i, repl='', string=line)
+
+        w.write(line)
 
     r.close()
     w.close()
 
 def attachTag() :
-    r = open('Desperate Housewives.txt', 'r+', encoding='UTF-8')  # raw 파일 읽어오기
-    w = open('example_tag.txt', 'a+', encoding='UTF-8')  # tag가 부착된 tag 파일 생성
+    r = open('The_Moon_Rising_River_raw.txt', 'r+', encoding='UTF-8')  # raw 파일 읽어오기
+    w = open('The_Moon_Rising_River_tag.txt', 'a+', encoding='UTF-8')  # tag가 부착된 tag 파일 생성
 
     while True:
         line = r.readline()

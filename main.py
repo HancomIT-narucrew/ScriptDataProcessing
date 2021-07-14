@@ -25,7 +25,10 @@ def getScripts(titles) :
 
         if html.status_code == 200:
             script_tag = soup.find_all(['script', 'style', 'header', 'footer', 'form'])
-            script_tags = ['body > div > div > main > nav.prevnext','body > div > div > main > article > h1','body > div > div > main > nav:nth-child(1) > ul','head > title']
+            script_tags = ['body > div > div > main > nav.prevnext',
+                           'body > div > div > main > article > h1',
+                           'body > div > div > main > nav:nth-child(1) > ul',
+                           'head > title']
 
             for script in script_tag:
                 script.extract()
@@ -46,7 +49,8 @@ if __name__ == '__main__':
     total_url = 'https://subslikescript.com/series/The_Moon_Rising_River-13634686'
     titles = list()
 
-    getUrl(total_url, titles)   # 전체 스크립트 URL 가져오기
-    getScripts(titles)    # 스크립트 본문 가져오기
-    change.modifyScripts()     # 스크립트 전처리
-    #hange.attachTag() # 정제된 스크립트에 tag 부착
+    # getUrl(total_url, titles)   # 전체 스크립트 URL 가져오기
+    # getScripts(titles)    # 스크립트 본문 가져오기
+    # change.modifyScripts()     # 스크립트 전처리
+
+    change.attachTag() # 정제된 스크립트에 tag 부착
