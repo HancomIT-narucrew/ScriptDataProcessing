@@ -4,6 +4,24 @@ def modifyScripts():
     r = open('The_Moon_Rising_River.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
     w = open('The_Moon_Rising_River_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
 
+    rm_pattern = [
+        '\([A-Z].*\)\s',  # [문장] 제거
+        '\[[A-Z].*\]\s',  # (문장) 제거
+        '^♪\s[A-Z].*',  # '♪' 문장 제거
+        '\-\s',  # '- ' 제거
+        '\#',  # '#' 제거
+        '"',  # " 제거
+        "^(')",  # '문장' '의 제거
+        "\s(')$",
+        '[A-Z].*\:\s',  # '이름:' 제거
+        '.*\.\.\..*',
+        'OpenSubtitles recommends using Nord VPN',
+        'from 3.49 USD/month ----> osdb.link/vpn',
+        # 첫문장의 시작을 대문자인 것으로 고치고 ...이 포함된 문장 삭제할 것
+        '^\s'  # 공백제거 (제일 나중에 해야함)
+    ]
+
+
     while True:
         line = r.readline()
         if not line: break
@@ -32,19 +50,8 @@ def modifyScripts():
         if 'p.m.' in line:  # 'p.m.' -> 'pm'
             line = line.replace('p.m.', 'pm')
 
-        rm_pattern = [
-            '\([A-Z].*\)\s',  # [문장] 제거
-            '\[[A-Z].*\]\s',  # (문장) 제거
-            '^♪\s[A-Z].*',  # '♪' 문장 제거
-            '\-\s',  # '- ' 제거
-            '\#',  # '#' 제거
-            '"',  # " 제거
-            "^(')",  # '문장' '의 제거
-            "\s(')$",
-            '[A-Z].*\:\s',  # '이름:' 제거
-            '[A-Z].*\.\.\.' # '...' 제거
-            '^\s'  # 공백제거 (제일 나중에 해야함)
-        ]
+        if line.isupper() == True:
+            line = line.replace(line,'')
 
         for i in rm_pattern:
             line = re.sub(pattern=i, repl='', string=line)
