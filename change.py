@@ -36,10 +36,14 @@ def modifyScripts():
         line = r.readline()
         if not line: break
 
+
         for i in rm_pattern:
             line = re.sub(pattern=i, repl='', string=line)
 
-        if line.isupper() == True:
+        for j in change_pattern:
+            line = re.sub(pattern=j, repl=re.sub(pattern='-', repl='', string=j), string=line)
+
+        if line.isupper() == True:  # 문장 전체 대문자 제거
             line = line.replace(line, '')
 
         if '!' in line:  # '!' -> '.'
@@ -65,6 +69,9 @@ def modifyScripts():
 
         if 'p.m.' in line:  # 'p.m.' -> 'pm'
             line = line.replace('p.m.', 'pm')
+
+        if '-in-law' in line:  # '-in-law' -> ' in law'
+            line = line.replace('-in-law', ' in law')
 
         w.write(line)
 
