@@ -21,10 +21,26 @@ def modifyScripts():
         '^\s'  # 공백제거 (제일 나중에 해야함)
     ]
 
+    change_pattern=[ #-삭제
+        'e-mail',
+        'T-shirt',
+        'ex-', #ex-girlfriend,ex-boyfriend
+        'co-',
+        '-er',
+        'non-'
+    ]
+    
+
 
     while True:
         line = r.readline()
         if not line: break
+
+        for i in rm_pattern:
+            line = re.sub(pattern=i, repl='', string=line)
+
+        if line.isupper() == True:
+            line = line.replace(line, '')
 
         if '!' in line:  # '!' -> '.'
             line = line.replace('!', '.')
@@ -49,12 +65,6 @@ def modifyScripts():
 
         if 'p.m.' in line:  # 'p.m.' -> 'pm'
             line = line.replace('p.m.', 'pm')
-
-        if line.isupper() == True:
-            line = line.replace(line,'')
-
-        for i in rm_pattern:
-            line = re.sub(pattern=i, repl='', string=line)
 
         w.write(line)
 
