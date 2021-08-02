@@ -2,8 +2,8 @@ import re
 
 def modifyScripts():
 
-    r = open('The_Moon_Rising_River_raw.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
-    w = open('temp.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
+    r = open('crawling.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
+    w = open('The_Moon_Rising_River_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
 
     rm_pattern = [
         '\([A-Z].*\)\s',  # [문장] 제거
@@ -21,18 +21,21 @@ def modifyScripts():
         '^\s'  # 공백제거 (제일 나중에 해야함)
     ]
 
-    change_pattern=[ #-삭제
+    change_pattern=[ # -삭제
         'e-mail',
         'T-shirt',
-        'ex-', #ex-girlfriend,ex-boyfriend
+        'ex-', # ex-girlfriend, ex-boyfriend
         'co-',
         '-er',
         'non-'
     ]
 
-    while True:
-        line = r.readline()
-        if not line: break
+    lines = r.readlines()  # 전체 스크립트
+    lines = list(map(lambda s: s.strip(), lines))  # 전체 스크립트에서 개행문자 삭제
+    count = 0  # index
+    file_list = list()  # 한 줄씩 입력하기 위해 생성한 빈 리스트
+
+    for line in lines:
 
         for i in rm_pattern:
             line = re.sub(pattern=i, repl='', string=line)
@@ -70,36 +73,20 @@ def modifyScripts():
         if '-in-law' in line:  # '-in-law' -> ' in law'
             line = line.replace('-in-law', ' in law')
 
-        w.write(line)
-
-    r.write("")
-
-    r.close()
-    w.close()
-
-def changeScript():
-    r = open('temp.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
-    w = open('The_Moon_Rising_River_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
-
-    lines = r.readlines()   # 전체 스크립트
-    lines = list(map(lambda s: s.strip(), lines))   # 전체 스크립트에서 개행문자 삭제
-    count = 0   # index
-    file_list = list() # 한 줄씩 입력하기 위해 생성한 빈 리스트
-
-    for line in lines:
-        if count == 0:
-            file_list.insert(count, line)
-            count += 1
-        else:
-            if line[0].isupper() == True:
+        if line != "":
+            if count == 0:
                 file_list.insert(count, line)
                 count += 1
             else:
-                file_list[count - 1] = file_list[count - 1] + ' ' + line
+                if line[0].isupper() == True:
+                    file_list.insert(count, line)
+                    count += 1
+                else:
+                    file_list[count - 1] = file_list[count - 1] + ' ' + line
 
     for i in file_list:
-        if i != '':
-           w.write(i + '\n')
+        if re.search('.*\.\.\..*',i) == None:
+            w.write(i + '\n')
 
     r.write("")
 

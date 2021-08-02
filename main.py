@@ -15,7 +15,7 @@ def getUrl(input, titles) :
         print(response.status_code)
 
 def getScripts(titles) :
-    f = open('The_Moon_Rising_River_raw.txt', 'a+', encoding='UTF-8')    # 원본 파일 생성
+    f = open('crawling.txt', 'a+', encoding='UTF-8')    # 원본 파일 생성
 
     for i in titles:
         url = 'https://subslikescript.com' + i
@@ -51,6 +51,5 @@ if __name__ == '__main__':
     getUrl(total_url, titles)   # 전체 스크립트 URL 가져오기
     getScripts(titles)    # 스크립트 본문 가져오기
     change.modifyScripts()     # 스크립트 전처리
-    change.changeScript()
 
     #change.attachTag() # 정제된 스크립트에 tag 부착
