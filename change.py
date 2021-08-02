@@ -1,6 +1,6 @@
 import re
 
-def modifyScripts():
+def modifyScripts(file_name):
 
     r = open('crawling.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
     w = open(file_name+'_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
@@ -9,7 +9,6 @@ def modifyScripts():
         '\([A-Z].*\)\s',  # [문장] 제거
         '\[[A-Z].*\]\s',  # (문장) 제거
         '^♪\s[A-Z].*',  # '♪' 문장 제거
-        '\-\s',  # '- ' 제거
         '\#',  # '#' 제거
         '"',  # " 제거
         "^(')",  # '문장' '의 제거
@@ -17,6 +16,8 @@ def modifyScripts():
         '[A-Z].*\:\s',  # '이름:' 제거
         'OpenSubtitles recommends using Nord VPN',
         'from 3.49 USD/month ----> osdb.link/vpn',
+        '.*\-.*',   # '-' 문장 제거
+        '.*\$.*', # '$' 문장제거
         '^\s'  # 공백제거 (제일 나중에 해야함)
     ]
 
@@ -37,11 +38,11 @@ def modifyScripts():
 
     for line in lines:
 
-        for i in rm_pattern:
-            line = re.sub(pattern=i, repl='', string=line)
-
         for j in change_pattern:
             line = re.sub(pattern=j, repl=re.sub(pattern='-', repl='', string=j), string=line)
+
+        for i in rm_pattern:
+            line = re.sub(pattern=i, repl='', string=line)
 
         if line.isupper() == True:  # 문장 전체 대문자 제거
             line = line.replace(line, '')
