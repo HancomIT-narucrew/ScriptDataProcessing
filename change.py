@@ -3,7 +3,7 @@ import re
 def modifyScripts(file_name):
 
     r = open('crawling.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
-    w = open(file_name+'_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
+    w = open('./raw_file/'+ file_name+'_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
 
     rm_pattern = [
         '\([A-Z].*\)\s',  # [문장] 제거
@@ -90,14 +90,15 @@ def modifyScripts(file_name):
         if re.search('.*\.\.\..*',i) == None:
             w.write(i + '\n')
 
+    print(count)
     r.truncate(0)
 
     r.close()
     w.close()
 
 def attachTag(file_name) :
-    r = open(file_name+'_raw.txt', 'r+', encoding='UTF-8')  # raw 파일 읽어오기
-    w = open(file_name+'_tag.txt', 'a+', encoding='UTF-8')  # tag가 부착된 tag 파일 생성
+    r = open('./raw_file/'+ file_name+'_raw.txt', 'r+', encoding='UTF-8')  # raw 파일 읽어오기
+    w = open('./tag_file/'+ +'_tag.txt', 'a+', encoding='UTF-8')  # tag가 부착된 tag 파일 생성
 
     while True:
         line = r.readline()
