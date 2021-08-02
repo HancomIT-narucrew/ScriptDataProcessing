@@ -45,6 +45,7 @@ def getScripts(titles) :
     f.close()
 
 if __name__ == '__main__':
+    #변경할 URL
     total_url = 'https://subslikescript.com/series/The_Moon_Rising_River-13634686'
     titles = list()
 

@@ -1,5 +1,4 @@
 import re
-
 def modifyScripts():
 
     r = open('crawling.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
@@ -15,7 +14,6 @@ def modifyScripts():
         "^(')",  # '문장' '의 제거
         "\s(')$",
         '[A-Z].*\:\s',  # '이름:' 제거
-        #'.*\.\.\..*', #...삭제
         'OpenSubtitles recommends using Nord VPN',
         'from 3.49 USD/month ----> osdb.link/vpn',
         '^\s'  # 공백제거 (제일 나중에 해야함)
@@ -73,6 +71,7 @@ def modifyScripts():
         if '-in-law' in line:  # '-in-law' -> ' in law'
             line = line.replace('-in-law', ' in law')
 
+        # ...을 지우기 위해 문장정렬
         if line != "":
             if count == 0:
                 file_list.insert(count, line)
@@ -84,11 +83,11 @@ def modifyScripts():
                 else:
                     file_list[count - 1] = file_list[count - 1] + ' ' + line
 
-    for i in file_list:
+    for i in file_list:  # ... 문장 삭제
         if re.search('.*\.\.\..*',i) == None:
             w.write(i + '\n')
 
-    r.write("")
+    r.truncate(0) #crawling.txt의 내용 삭제
 
     r.close()
     w.close()
@@ -102,7 +101,7 @@ def attachTag() :
         if not line: break
 
         line = re.sub(pattern='\s', repl='\tO\n', string=line)
-        line = re.sub(pattern='^	O', repl='', string=line)
+        line = re.sub(pattern='^   O', repl='', string=line)
         line = re.sub(pattern='\,\tO', repl='\tCOMMA', string=line)
         line = re.sub(pattern='\.\tO', repl='\tPERIOD', string=line)
         line = re.sub(pattern='\?\tO', repl="\tQUESTION", string=line)
