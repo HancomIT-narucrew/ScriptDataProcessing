@@ -1,9 +1,9 @@
 import re
 
-def modifyScripts():
+def modifyScripts(file_name):
 
     r = open('crawling.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
-    w = open('The_Moon_Rising_River_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
+    w = open(file_name+'_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
 
     rm_pattern = [
         '\([A-Z].*\)\s',  # [문장] 제거
@@ -28,6 +28,7 @@ def modifyScripts():
         'co-',
         '-er',
         'non-'
+        're-'
     ]
 
     lines = r.readlines()  # 전체 스크립트
@@ -88,14 +89,14 @@ def modifyScripts():
         if re.search('.*\.\.\..*',i) == None:
             w.write(i + '\n')
 
-    r.write("")
+    r.truncate(0)
 
     r.close()
     w.close()
 
-def attachTag() :
-    r = open('The_Moon_Rising_River_raw.txt', 'r+', encoding='UTF-8')  # raw 파일 읽어오기
-    w = open('The_Moon_Rising_River_tag.txt', 'a+', encoding='UTF-8')  # tag가 부착된 tag 파일 생성
+def attachTag(file_name) :
+    r = open(file_name+'_raw.txt', 'r+', encoding='UTF-8')  # raw 파일 읽어오기
+    w = open(file_name+'_tag.txt', 'a+', encoding='UTF-8')  # tag가 부착된 tag 파일 생성
 
     while True:
         line = r.readline()

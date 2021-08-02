@@ -45,11 +45,12 @@ def getScripts(titles) :
     f.close()
 
 if __name__ == '__main__':
-    total_url = 'https://subslikescript.com/series/The_Moon_Rising_River-13634686'
+    total_url = input("url을 입력하세요 : ")
+    file_name = input("파일 이름을 지정하세요 : ")
     titles = list()
 
     getUrl(total_url, titles)   # 전체 스크립트 URL 가져오기
     getScripts(titles)    # 스크립트 본문 가져오기
-    change.modifyScripts()     # 스크립트 전처리
+    change.modifyScripts(file_name)     # 스크립트 전처리
 
-    #change.attachTag() # 정제된 스크립트에 tag 부착
+    #change.attachTag(file_name) # 정제된 스크립트에 tag 부착
