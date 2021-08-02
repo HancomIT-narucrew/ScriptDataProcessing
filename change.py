@@ -6,9 +6,10 @@ def modifyScripts(file_name):
     w = open('./raw_file/'+ file_name+'_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
 
     rm_pattern = [
-        '\([A-Z].*\)\s',  # [문장] 제거
-        '\[[A-Z].*\]\s',  # (문장) 제거
-        '^♪\s[A-Z].*',  # '♪' 문장 제거
+        '\([A-Z].*\)',  # [문장] 제거
+        '\[[A-Z].*\]',  # (문장) 제거
+
+        '.*\♪.*',  # '♪' 문장 제거
         '\#',  # '#' 제거
         '"',  # " 제거
         "^(')",  # '문장' '의 제거
@@ -18,18 +19,24 @@ def modifyScripts(file_name):
         'from 3.49 USD/month ----> osdb.link/vpn',
         '.*\-.*',   # '-' 문장 제거
         '.*\$.*', # '$' 문장제거
+        '.*\w+\.\w+\.+.*' # 문자.문자.로 된 문장 제거 ex)L.A.
+        
+        
+        
         '^\s'  # 공백제거 (제일 나중에 해야함)
     ]
 
     change_pattern=[ # -삭제
         'e-mail',
         'T-shirt',
-        'ex-', # ex-girlfriend, ex-boyfriend
+        'ex-',  # ex-girlfriend, ex-boyfriend
         'co-',
         '-er',
         'non-'
         're-'
     ]
+
+
 
     lines = r.readlines()  # 전체 스크립트
     lines = list(map(lambda s: s.strip(), lines))  # 전체 스크립트에서 개행문자 삭제
@@ -117,7 +124,6 @@ def attachTag(file_name) :
         line = re.sub(pattern="n't\tO", repl="\tO\nn't\tO", string=line)
 
         w.write(line)
-
 
     r.close()
     w.close()
