@@ -8,7 +8,6 @@ def modifyScripts(file_name):
     rm_pattern = [
         '\([A-Z].*\)',  # [문장] 제거
         '\[[A-Z].*\]',  # (문장) 제거
-
         '.*\♪.*',  # '♪' 문장 제거
         '\#',  # '#' 제거
         '"',  # " 제거
@@ -20,9 +19,6 @@ def modifyScripts(file_name):
         '.*\-.*',   # '-' 문장 제거
         '.*\$.*', # '$' 문장제거
         '.*\w+\.\w+\.+.*' # 문자.문자.로 된 문장 제거 ex)L.A.
-        
-        
-        
         '^\s'  # 공백제거 (제일 나중에 해야함)
     ]
 
@@ -35,8 +31,6 @@ def modifyScripts(file_name):
         'non-'
         're-'
     ]
-
-
 
     lines = r.readlines()  # 전체 스크립트
     lines = list(map(lambda s: s.strip(), lines))  # 전체 스크립트에서 개행문자 삭제
@@ -56,6 +50,9 @@ def modifyScripts(file_name):
 
         if '!' in line:  # '!' -> '.'
             line = line.replace('!', '.')
+
+        if ';' in line:  # ';' -> '.'
+            line = line.replace(';', '.')
 
         if '&' in line:  # '&' -> 'and'
             line = line.replace('&', 'and')
@@ -78,8 +75,18 @@ def modifyScripts(file_name):
         if 'p.m.' in line:  # 'p.m.' -> 'pm'
             line = line.replace('p.m.', 'pm')
 
+        if '/' in line:  # '/' -> ' and '
+            line = line.replace('/', ' and ')
+
+        if '&' in line:  # '&' -> ' and '
+            line = line.replace('&', ' and ')
+
         if '-in-law' in line:  # '-in-law' -> ' in law'
             line = line.replace('-in-law', ' in law')
+
+
+        if '  ' in line:  # '  ' -> ' '
+            line = line.replace('  ', ' ')
 
         # ...을 지우기 위해 문장정렬
         if line != "":
