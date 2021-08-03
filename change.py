@@ -17,13 +17,11 @@ def modifyScripts(file_name):
         'OpenSubtitles recommends using Nord VPN',
         'from 3.49 USD/month ----> osdb.link/vpn',
         '.*\-.*',   # '-' 문장 제거
-        '.*\w+\.\w+\.+.*' # 문자.문자.로 된 문장 제거 ex)L.A.
-        '\s$'  #뒤에 공백이 있을 때
-        '.*\:.*' # ':'문장제거
-        '.*\;.*' # ';'문장제거
-        '.*\=.*' # '=' 문장제거
-        
-        
+        '.*\w+\.\w+\.+.*',   # 문자.문자.로 된 문장 제거 ex)L.A.
+        '\s$',   #뒤에 공백이 있을 때
+        '.*\:.*',    # ':'문장제거
+        '.*\;.*',    # ';'문장제거
+        '.*\=.*',    # '=' 문장제거
         
         '^\s'  # 공백제거 (제일 나중에 해야함)
     ]
@@ -34,7 +32,7 @@ def modifyScripts(file_name):
         'ex-',  # ex-girlfriend, ex-boyfriend
         'co-',
         '-er',
-        'non-'
+        'non-',
         're-'
     ]
 
@@ -100,8 +98,8 @@ def modifyScripts(file_name):
                 else:
                     file_list[count - 1] = file_list[count - 1] + ' ' + line
 
-    for i in file_list:  # ... 문장 삭제
-        if re.search('.*\.\.\..*',i) == None:
+    for i in file_list:  # '...','..' 문장 삭제
+        if re.search('.*\.\..*',i) == None:
             w.write(i + '\n')
 
     print(count)
