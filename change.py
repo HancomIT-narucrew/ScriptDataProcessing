@@ -36,9 +36,19 @@ def modifyScripts(file_name):
         're-'
     ]
 
+    dot_pattern=[   #...을 .으로 바꾸는 패턴
+        'um...',
+        'Um...',
+        'so...',
+        'So...',
+        'uh...',
+        'Uh...'
+
+    ]
+
     lines = r.readlines()  # 전체 스크립트
     lines = list(map(lambda s: s.strip(), lines))  # 전체 스크립트에서 개행문자 삭제
-    count = 0  # index
+    count = 0  # index, 라인 수
     file_list = list()  # 한 줄씩 입력하기 위해 생성한 빈 리스트
 
     for line in lines:
@@ -48,6 +58,9 @@ def modifyScripts(file_name):
 
         for i in rm_pattern:
             line = re.sub(pattern=i, repl='', string=line)
+
+        for k in dot_pattern:
+            line = re.sub(pattern=k, repl=re.sub(pattern='...', repl='.', string=k), string=line)
 
         if line.isupper() == True:  # 문장 전체 대문자 제거
             line = line.replace(line, '')
@@ -61,18 +74,6 @@ def modifyScripts(file_name):
         if '&' in line:  # '&' -> 'and'
             line = line.replace('&', 'and')
 
-        if 'um...' in line:  # 'um...' -> 'um.'
-            line = line.replace('um...', 'um.')
-
-        if 'Um...' in line:  # 'Um...' -> 'Um.'
-            line = line.replace('Um...', 'Um.')
-
-        if 'so...' in line:  # 'so...' -> 'so.'
-            line = line.replace('so...', 'so.')
-
-        if 'uh...' in line:  # 'uh...' -> 'uh.'
-            line = line.replace('uh...', 'uh.')
-
         if '/' in line:  # '/' -> ' and '
             line = line.replace('/', ' and ')
 
@@ -82,7 +83,13 @@ def modifyScripts(file_name):
         if '%' in line:  # '%' -> ' percents'
             line = line.replace('%', ' percents')
 
-        if '  ' in line:  # '  ' -> ' ' #공백이 두번인 것 제거
+        if 'Mrs.' in line:  # 'Mrs.' -> 'Mrs'
+            line = line.replace('Mrs.', 'Mrs')
+
+        if 'Mr.' in line:  # 'Mr.' -> 'Mr'
+            line = line.replace('Mr.', 'Mr')
+
+        if '  ' in line:  # '  ' -> ' ' # 공백이 두번인 것 제거
             line = line.replace('  ', ' ')
 
 
