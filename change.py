@@ -1,7 +1,5 @@
 import re
 
-#ADVENTURES OF SUPERMAN
-#https://subslikescript.com/series/American_Dad-397306
 def modifyScripts(file_name):
 
     r = open('crawling.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
@@ -21,8 +19,10 @@ def modifyScripts(file_name):
         '.*\♪.*',  # '♪' 문장 제거
         '.*\#.*',  # '#' 제거
         '"',  # " 제거
+        '.*''.*' # ''문장'' 제거 
         "^(')",  # '문장' '의 제거
-        "\s(')$",
+        "(')$", #  '으로 끝나는 문장 제거
+
         '[A-Z].*\:\s',  # '이름:' 제거
         'OpenSubtitles recommends using Nord VPN',
         'from 3.49 USD/month ----> osdb.link/vpn',
@@ -96,8 +96,14 @@ def modifyScripts(file_name):
         if "ma'am" in line:  # 'ma'am' -> 'maam'
             line = line.replace("ma'am", "maam")
 
-        if '  ' in line:  # '  ' -> ' ' # 공백이 두번인 것 제거
-            line = line.replace('  ', ' ')
+        if "?." in line:  # '?.' -> '?'
+            line = line.replace("?.", "?")
+
+        if "." in line:  # '?.' -> '?'
+            line = line.replace("?.", "?")
+
+        if "'." in line:  # "'."->"'."
+            line = line.replace("'.", ".")
 
 
         # ...을 지우기 위해 문장정렬
