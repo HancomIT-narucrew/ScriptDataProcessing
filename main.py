@@ -1,5 +1,6 @@
 import requests
 import change
+import warnings
 from bs4 import BeautifulSoup
 
 def getUrl(input, titles) :
@@ -45,6 +46,8 @@ def getScripts(titles) :
     f.close()
 
 if __name__ == '__main__':
+    warnings.filterwarnings(action='ignore')    # 경고무시
+
     total_url = input("url을 입력하세요 : ")
     file_name = input("파일 이름을 지정하세요 : ")
     titles = list()
