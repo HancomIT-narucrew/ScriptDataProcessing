@@ -89,6 +89,9 @@ def modifyScripts(file_name):
         if 'Mr.' in line:  # 'Mr.' -> 'Mr'
             line = line.replace('Mr.', 'Mr')
 
+        if "ma'am" in line:  # 'ma'am' -> 'maam'
+            line = line.replace("ma'am", "maam")
+
         if '  ' in line:  # '  ' -> ' ' # 공백이 두번인 것 제거
             line = line.replace('  ', ' ')
 
