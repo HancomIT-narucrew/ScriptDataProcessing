@@ -1,9 +1,10 @@
 import re
+from os.path import getsize
 
 def modifyScripts(file_name):
-
+    file_path = './raw_file/'+ file_name+'_raw.txt'
     r = open('crawling.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
-    w = open('./raw_file/'+ file_name+'_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
+    w = open(file_path, 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
 
     rm_pattern = [
         ##지우지 마세용
@@ -19,8 +20,7 @@ def modifyScripts(file_name):
         '.*\♪.*',  # '♪' 문장 제거
         '.*\#.*',  # '#' 제거
         '"',  # " 제거
-        '.*''.*' # " ''문장'' " 제거 
-        '.*\?\?.*' #??삭제
+        '.*''.*' # " ''문장'' " 제거
         
         #######문제의 아이들...
         "^(')",  # '문장 의  '제거
@@ -37,7 +37,9 @@ def modifyScripts(file_name):
         '.*\:.*',    # ':'문장제거
         '.*\;.*',    # ';'문장제거
         '.*\=.*',    # '=' 문장제거
-        '.*(www\.).*'   # 'www' 문장제거
+        '.*\?\?.*', # '??' 문장 제거
+        '.*(www\.).*',   # 'www' 문장제거
+        '.*(\.com).*'   # 'com' 문장제거
         
         '^\s'  # 공백제거 (제일 나중에 해야함)
     ]
@@ -111,6 +113,9 @@ def modifyScripts(file_name):
         if "'." in line:  # "'."->"'."
             line = line.replace("'.", ".")
 
+        if "  " in line:  # "  "->" "
+            line = line.replace("  ", " ")
+
 
         # ...을 지우기 위해 문장정렬
         if line != "":
@@ -128,7 +133,11 @@ def modifyScripts(file_name):
         if re.search('.*\.\..*',i) == None:
             w.write(i + '\n')
 
-    print(count)
+    print("==========================================")
+    print("Name :", file_name)
+    print("Total Lines :", count)
+    print("Size :", getsize(file_path)/1024, 'KB')
+
     r.truncate(0)
 
     r.close()
