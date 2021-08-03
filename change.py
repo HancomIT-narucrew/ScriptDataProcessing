@@ -37,13 +37,10 @@ def modifyScripts(file_name):
     ]
 
     dot_pattern=[   #...을 .으로 바꾸는 패턴
-        'um...',
-        'Um...',
-        'so...',
-        'So...',
-        'uh...',
-        'Uh...'
-
+        'um...', 'Um...',
+        'so...', 'So...',
+        'uh...', 'Uh...',
+        'oh...', 'Oh...'
     ]
 
     lines = r.readlines()  # 전체 스크립트
