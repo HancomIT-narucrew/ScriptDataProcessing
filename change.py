@@ -1,16 +1,23 @@
 import re
 
+#ADVENTURES OF SUPERMAN
+#https://subslikescript.com/series/American_Dad-397306
 def modifyScripts(file_name):
 
     r = open('crawling.txt', 'r+', encoding='UTF-8')    # 원본 파일 읽어오기
     w = open('./raw_file/'+ file_name+'_raw.txt', 'a+', encoding='UTF-8')    # 전처리 된 raw 파일 생성
 
-
     rm_pattern = [
-        '\[[A-Z].*\]',  # [문장] 제거
-        '\[\s([A-Z].*)\s\]',    #[\s문장\s] 제거
-        '\([A-Z].*\)',  # (문장) 제거
-        '\(\s([A-Z].*)\s\)', # (\s문장\s) 제거
+        ##지우지 마세용
+        # '\[[A-Z].*\]',  # [문장] 제거
+        # '\[\s([A-Z].*)\s\]',    #[\s문장\s] 제거
+        # '\([A-Z].*\)',  # (문장) 제거
+        # '\(\s([A-Z].*)\s\)', # (\s문장\s) 제거
+
+        '.*\[.*',   #[ 포함된 문장 제거
+        '.*\].*',   #]
+        '.*\(.*',   #( 포함된 문장 제거
+        '.*\).*',   #)
         '.*\♪.*',  # '♪' 문장 제거
         '.*\#.*',  # '#' 제거
         '"',  # " 제거
