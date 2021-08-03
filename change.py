@@ -17,8 +17,11 @@ def modifyScripts(file_name):
         'OpenSubtitles recommends using Nord VPN',
         'from 3.49 USD/month ----> osdb.link/vpn',
         '.*\-.*',   # '-' 문장 제거
-        '.*\$.*', # '$' 문장제거
         '.*\w+\.\w+\.+.*' # 문자.문자.로 된 문장 제거 ex)L.A.
+        '^\s', #앞이 공백일 때
+        '\s$'  #뒤에 공백이 있을 때
+        
+        
         '^\s'  # 공백제거 (제일 나중에 해야함)
     ]
 
@@ -69,24 +72,16 @@ def modifyScripts(file_name):
         if 'uh...' in line:  # 'uh...' -> 'uh.'
             line = line.replace('uh...', 'uh.')
 
-        if 'a.m.' in line:  # 'a.m.' -> 'am'
-            line = line.replace('a.m.', 'am')
-
-        if 'p.m.' in line:  # 'p.m.' -> 'pm'
-            line = line.replace('p.m.', 'pm')
-
         if '/' in line:  # '/' -> ' and '
             line = line.replace('/', ' and ')
 
         if '&' in line:  # '&' -> ' and '
             line = line.replace('&', ' and ')
 
-        if '-in-law' in line:  # '-in-law' -> ' in law'
-            line = line.replace('-in-law', ' in law')
-
-
-        if '  ' in line:  # '  ' -> ' '
+        if '  ' in line:  # '  ' -> ' ' #공백이 두번인 것 제거
             line = line.replace('  ', ' ')
+
+
 
         # ...을 지우기 위해 문장정렬
         if line != "":
