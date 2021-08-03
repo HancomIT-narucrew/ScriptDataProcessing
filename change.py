@@ -81,6 +81,9 @@ def modifyScripts(file_name):
         if '&' in line:  # '&' -> ' and '
             line = line.replace('&', ' and ')
 
+        if '%' in line:  # '%' -> ' percents'
+            line = line.replace('%', ' percents')
+
         if '  ' in line:  # '  ' -> ' ' #공백이 두번인 것 제거
             line = line.replace('  ', ' ')
 
