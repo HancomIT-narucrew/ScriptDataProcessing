@@ -42,8 +42,7 @@ def modifyScripts(file_name):
         '.*\?\?.*', # '??' 문장 제거
         '.*(www\.).*',   # 'www' 문장제거
         '.*(\.com).*'   # 'com' 문장제거
-        '.*\?[0-9].*' #?숫자 문장 제거
-        '.*\*.*' # * 문장제거
+        '.*\?[0-9].*' # ?숫자 문장 제거
         
         
         '^\s'  # 공백제거 (제일 나중에 해야함)
@@ -135,7 +134,7 @@ def modifyScripts(file_name):
                     file_list[count - 1] = file_list[count - 1] + ' ' + line
 
     for i in file_list:  # '...','..' 문장 삭제
-        if re.search('.*\.\..*',i) == None:
+        if re.search('.*\.\..*',i) == None and re.search('…',i) == None:
             w.write(i + '\n')
 
     print("==========================================")
