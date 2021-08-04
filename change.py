@@ -20,6 +20,7 @@ def modifyScripts(file_name):
         '.*\♪.*',  # '♪' 문장 제거
         '.*\#.*',  # '#' 제거
         '_' # '_' 제거
+        '"' # '"' 제거
         '"',  # " 제거
         ".*('').*", # " ''문장'' " 제거
         
@@ -155,6 +156,7 @@ def modifyScripts(file_name):
 def attachTag(file_name) :
     r = open('./raw_file/'+ file_name+'_raw.txt', 'r+', encoding='UTF-8')  # raw 파일 읽어오기
     w = open('./tag_file/'+ +'_tag.txt', 'a+', encoding='UTF-8')  # tag가 부착된 tag 파일 생성
+    count = 0   # 태그 수
 
     while True:
         line = r.readline()
@@ -173,6 +175,8 @@ def attachTag(file_name) :
         line = re.sub(pattern='^	O', repl='', string=line)
 
         w.write(line)
+        count += 1
 
+    print("count :", count)
     r.close()
     w.close()
