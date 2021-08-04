@@ -53,6 +53,8 @@ def modifyScripts(file_name):
         '.*\s\?.*', #' ?'문장제거
         '.*{.*', # '{'문장제거
         '.*¶.*', # '¶'문장제거
+        '.*(Sync and corrections by).*',  # 삭제
+
 
 
         '^\s'  # 공백제거 (제일 나중에 해야함)
