@@ -133,7 +133,7 @@ def modifyScripts(file_name):
                 else:
                     file_list[count - 1] = file_list[count - 1] + ' ' + line
 
-    for i in file_list:  # '...','..' 문장 삭제
+    for i in file_list:  # '...','..', '…' 문장 삭제
         if re.search('.*\.\..*',i) == None and re.search('…',i) == None:
             w.write(i + '\n')
 
