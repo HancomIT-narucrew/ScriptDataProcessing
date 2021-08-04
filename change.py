@@ -20,11 +20,11 @@ def modifyScripts(file_name):
         '.*\♪.*',  # '♪' 문장 제거
         '.*\#.*',  # '#' 제거
         '"',  # " 제거
-        '.*''.*', # " ''문장'' " 제거
+        ".*('').*", # " ''문장'' " 제거
         
         #######문제의 아이들...
-        "^(')",  # '문장 의  '제거
-        "(')$",  #  문장' 의 '제거
+       "^(')",  # '문장 의  '제거
+       "(')$",  #  문장' 의 '제거
         #######
 
         '.*(\.\s\.\s).*', # '. . . ' 삭제
@@ -160,7 +160,6 @@ def attachTag(file_name) :
         if not line: break
 
         line = re.sub(pattern='\s', repl='\tO\n', string=line)
-        line = re.sub(pattern='^	O', repl='', string=line)
         line = re.sub(pattern='\,\tO', repl='\tCOMMA', string=line)
         line = re.sub(pattern='\.\tO', repl='\tPERIOD', string=line)
         line = re.sub(pattern='\?\tO', repl="\tQUESTION", string=line)
@@ -170,6 +169,7 @@ def attachTag(file_name) :
         line = re.sub(pattern="'m\tO", repl="\tO\n'm\tO", string=line)
         line = re.sub(pattern="'ll\tO", repl="\tO\n'll\tO", string=line)
         line = re.sub(pattern="n't\tO", repl="\tO\nn't\tO", string=line)
+        line = re.sub(pattern='^	O', repl='', string=line)
 
         w.write(line)
 
