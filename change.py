@@ -121,6 +121,9 @@ def modifyScripts(file_name):
         if "ma'am" in line:  # 'ma'am' -> 'maam'
             line = line.replace("ma'am", "maam")
 
+        if "Ma'am" in line:  # 'Ma'am' -> 'Maam'
+            line = line.replace("Maam", "Maam")
+
         if "?." in line:  # '?.' -> '?'
             line = line.replace("?.", "?")
 
