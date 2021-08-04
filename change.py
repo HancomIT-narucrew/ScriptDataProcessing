@@ -32,6 +32,7 @@ def modifyScripts(file_name):
         'OpenSubtitles recommends using Nord VPN',
         'from 3.49 USD/month ----> osdb.link/vpn',
         '.*\-.*',   # '-' 문장 제거
+        '.*\‐.*',   # '‐' 문장 제거 (다른 '-')
         '.*\w+\.\w+\.+.*',   # 문자.문자.로 된 문장 제거 ex)L.A.
         '\s$',   #뒤에 공백이 있을 때
         '.*\:.*',    # ':'문장제거
