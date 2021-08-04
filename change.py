@@ -71,11 +71,17 @@ def modifyScripts(file_name):
         're-'
     ]
 
-    dot_pattern=[   #...을 .으로 바꾸는 패턴
+    change_dot=[   #...을 .으로 바꾸는 패턴
         'um...', 'Um...',
         'so...', 'So...',
         'uh...', 'Uh...',
         'oh...', 'Oh...'
+    ]
+
+    remove_dot=[
+        'Mr.', 'mr.',
+        'Mrs.', 'mrs.',
+        'Dr.', 'dr.',
     ]
 
     lines = r.readlines()  # 전체 스크립트
@@ -88,11 +94,14 @@ def modifyScripts(file_name):
         for j in change_pattern:
             line = re.sub(pattern=j, repl=re.sub(pattern='-', repl='', string=j), string=line)
 
+        for k in change_dot:
+            line = re.sub(pattern=k, repl=re.sub(pattern='...', repl='.', string=k), string=line)
+
+        for c in remove_dot:
+            line = re.sub(pattern=c, repl=re.sub(pattern='.', repl='', string=c), string=line)
+
         for i in rm_pattern:
             line = re.sub(pattern=i, repl='', string=line)
-
-        for k in dot_pattern:
-            line = re.sub(pattern=k, repl=re.sub(pattern='...', repl='.', string=k), string=line)
 
         if line.isupper() == True:  # 문장 전체 대문자 제거
             line = line.replace(line, '')
