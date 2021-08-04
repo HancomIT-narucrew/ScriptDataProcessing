@@ -57,7 +57,7 @@ def modifyScripts(file_name):
         '.*{.*', # '{'문장제거
         '.*¶.*', # '¶'문장제거
         '.*~.*', # '~'문장제거
-        '.*(Sync and corrections by).*',  # 삭제
+        '.*(Sync and).*',  # 삭제
         '.*(Sync by).*', # 삭제
         '.*(Synced by).*',  # 삭제
         '.*(Original Air Date).*', # 삭제
