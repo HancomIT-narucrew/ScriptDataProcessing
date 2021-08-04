@@ -60,6 +60,8 @@ def modifyScripts(file_name):
         '.*(Sync and corrections by).*',  # 삭제
         '.*(Sync by).*', # 삭제
         '.*(Original Air Date).*', # 삭제
+        ".*(D'you).*", # 삭제
+        ".*(y'know).*", # 삭제
 
         '^\s'  # 공백제거 (제일 나중에 해야함)
     ]
