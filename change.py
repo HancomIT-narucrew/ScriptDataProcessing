@@ -70,10 +70,13 @@ def modifyScripts(file_name):
         '.*{.*', # '{' 문장제거
         '.*¶.*', # '¶' 문장제거
         '.*~.*', # '~' 문장제거
+        #'.*(\\)*', # '~' 문장제거
         ".*(\^).*",  # '^' 문장제거
         ".*(\w\?\w).*",  # '글자?글자' 문장제거
         '.*(\+).*', # '+'문장제거
-        '.*(\=).*', # '='문장제거
+        '.*(\.\,).*', # '+'문장제거
+        ".*('\w\w\w).*" #'''포함 3글자 이상 문장제거
+
 
         '^\s'  # 공백제거 (제일 나중에 해야함)
     ]
@@ -149,6 +152,7 @@ def modifyScripts(file_name):
 
         if "Ma'am" in line:  # 'Ma'am' -> 'Maam'
             line = line.replace("Maam", "Maam")
+            line = line.replace(",.", ".")
 
         if "?." in line:  # '?.' -> '?'
             line = line.replace("?.", "?")
@@ -187,7 +191,7 @@ def modifyScripts(file_name):
     print("Total Lines :", count)
     print("Size :", getsize(file_path)/1024, 'KB')
 
-    r.truncate(0)
+    #r.truncate(0)
 
     r.close()
     w.close()
