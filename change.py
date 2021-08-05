@@ -126,49 +126,19 @@ def modifyScripts(file_name):
         if line.isupper() == True:  # 문장 전체 대문자 제거
             line = line.replace(line, '')
 
-         # '!' -> '.'
-            line = line.replace('!', '.')
-
-        if '&' in line:  # '&' -> 'and'
-            line = line.replace('&', 'and')
-
-        if '/' in line:  # '/' -> ' and '
-            line = line.replace('/', ' and ')
-
-        if '&' in line:  # '&' -> ' and '
-            line = line.replace('&', ' and ')
-
-        if '%' in line:  # '%' -> ' percents'
-            line = line.replace('%', ' percents')
-
-        if 'Mrs.' in line:  # 'Mrs.' -> 'Mrs'
-            line = line.replace('Mrs.', 'Mrs')
-
-        if 'Mr.' in line:  # 'Mr.' -> 'Mr'
-            line = line.replace('Mr.', 'Mr')
-
-        if "ma'am" in line:  # 'ma'am' -> 'maam'
-            line = line.replace("ma'am", "maam")
-
-        if "Ma'am" in line:  # 'Ma'am' -> 'Maam'
-            line = line.replace("Maam", "Maam")
-            line = line.replace(",.", ".")
-
-        if "?." in line:  # '?.' -> '?'
-            line = line.replace("?.", "?")
-
-        if "." in line:  # '?.' -> '?'
-            line = line.replace("?.", "?")
-
-        if "'." in line:  # "'." -> "."
-            line = line.replace("'.", ".")
-
-        if " ." in line:  # " ." -> "."
-            line = line.replace(" .", ".")
-
-        if "  " in line:  # "\s\s" -> "\s"
-            line = line.replace("  ", " ")
-
+        line = line.replace('!', '.')   # '!' -> '.'
+        line = line.replace('&', 'and') # '&' -> 'and'
+        line = line.replace('/', ' and ')   # '/' -> ' and '
+        line = line.replace('&', ' and ')   # '&' -> ' and '
+        line = line.replace('%', ' percents')   # '%' -> ' percents'
+        line = line.replace("ma'am", "maam")    # 'ma'am' -> 'maam'
+        line = line.replace("Maam", "Maam") # 'Ma'am' -> 'Maam'
+        line = line.replace(",.", ".")  # ',.' -> ',.'
+        line = line.replace("?.", "?")  # '?.' -> '?'
+        line = line.replace(".?", ".")  # '.?' -> '.'
+        line = line.replace("'.", ".")  # "'." -> "."
+        line = line.replace(" .", ".")  # " ." -> "."
+        line = line.replace("  ", " ")  # "\s\s" -> "\s"
 
         # ...을 지우기 위해 문장정렬
         if line != "":
