@@ -18,6 +18,7 @@ def modifyScripts(file_name):
         '.*(Sync and).*',  # 삭제
         '.*(Sync by).*',  # 삭제
         '.*(Synced by).*',  # 삭제
+        '.*(Subtitles by).*',  # 삭제
         '.*(Sync corrections ).*',# 삭제
         '.*(Original Air Date).*',  # 삭제
         ".*(D'you).*",  # 삭제
@@ -70,7 +71,6 @@ def modifyScripts(file_name):
         '.*{.*', # '{' 문장제거
         '.*¶.*', # '¶' 문장제거
         '.*~.*', # '~' 문장제거
-        #'.*(\\)*', # '~' 문장제거
         ".*(\^).*",  # '^' 문장제거
         ".*(\w\?\w).*",  # '글자?글자' 문장제거
         '.*(\+).*', # '+'문장제거
@@ -191,7 +191,7 @@ def modifyScripts(file_name):
     print("Total Lines :", count)
     print("Size :", getsize(file_path)/1024, 'KB')
 
-    #r.truncate(0)
+    r.truncate(0)
 
     r.close()
     w.close()
