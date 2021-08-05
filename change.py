@@ -71,13 +71,12 @@ def modifyScripts(file_name):
         '.*{.*', # '{' 문장제거
         '.*¶.*', # '¶' 문장제거
         '.*~.*', # '~' 문장제거
-        '.*(\\).*', # '\' 문장제거
         ".*(\^).*",  # '^' 문장제거
         ".*(\w\?\w).*",  # '글자?글자' 문장제거
         '.*(\+).*', # '+'문장제거
         '.*(\.\,).*', # '.,'문장제거
         '.*(\.\?).*', # '.?'문장제거
-        ".*('\w+').*" # '글자' 문장제거
+        ".*('\w+').*" #'''포함 3글자 이상 문장제거
 
 
         '^\s'  # 공백제거 (제일 나중에 해야함)
@@ -167,8 +166,8 @@ def modifyScripts(file_name):
     w.close()
 
 def attachTag(file_name) :
-    r = open('./raw_file/'+ file_name+'_raw.txt', 'r+', encoding='UTF-8')  # raw 파일 읽어오기
-    w = open('./tag_file/'+ +'_tag.txt', 'a+', encoding='UTF-8')  # tag가 부착된 tag 파일 생성
+    r = open('C:/Users/HancomIT/PycharmProjects/ScriptDataProcessing/raw_file/'+ file_name+'_raw.txt', 'r+', encoding='UTF-8')  # raw 파일 읽어오기
+    w = open('C:/Users/HancomIT/PycharmProjects/ScriptDataProcessing/tag_file/'+file_name+'_tag.txt', 'a+', encoding='UTF-8')  # tag가 부착된 tag 파일 생성
     count = 0   # 태그 수
 
     while True:
@@ -185,7 +184,7 @@ def attachTag(file_name) :
         line = re.sub(pattern="'m\tO", repl="\tO\n'm\tO", string=line)
         line = re.sub(pattern="'ll\tO", repl="\tO\n'll\tO", string=line)
         line = re.sub(pattern="n't\tO", repl="\tO\nn't\tO", string=line)
-        line = re.sub(pattern='^	O', repl='', string=line)
+        line = re.sub(pattern='^\tO', repl='', string=line)
 
         w.write(line)
         count += 1
