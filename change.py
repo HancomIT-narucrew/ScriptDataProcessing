@@ -75,7 +75,8 @@ def modifyScripts(file_name):
         ".*(\^).*",  # '^' 문장제거
         ".*(\w\?\w).*",  # '글자?글자' 문장제거
         '.*(\+).*', # '+'문장제거
-        '.*(\.\,).*', # '+'문장제거
+        '.*(\.\,).*', # '.,'문장제거
+        '.*(\.\?).*', # '.?'문장제거
         ".*('\w+').*" # '글자' 문장제거
 
 
@@ -130,13 +131,11 @@ def modifyScripts(file_name):
         line = line.replace('!', '.')   # '!' -> '.'
         line = line.replace('&', 'and') # '&' -> 'and'
         line = line.replace('/', ' and ')   # '/' -> ' and '
-        line = line.replace('&', ' and ')   # '&' -> ' and '
         line = line.replace('%', ' percents')   # '%' -> ' percents'
         line = line.replace("ma'am", "maam")    # 'ma'am' -> 'maam'
-        line = line.replace("Maam", "Maam") # 'Ma'am' -> 'Maam'
-        line = line.replace(",.", ".")  # ',.' -> ',.'
+        line = line.replace("Ma'am", "Maam") # 'Ma'am' -> 'Maam'
+        line = line.replace(",.", ".")  # ',.' -> '.'
         line = line.replace("?.", "?")  # '?.' -> '?'
-        line = line.replace(".?", ".")  # '.?' -> '.'
         line = line.replace("'.", ".")  # "'." -> "."
         line = line.replace(" .", ".")  # " ." -> "."
         line = line.replace("  ", " ")  # "\s\s" -> "\s"
