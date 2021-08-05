@@ -22,9 +22,11 @@ def modifyScripts(file_name):
         '.*\#.*',  # '#' 제거
         '_', # '_' 제거
         '—', # '—' 제거(다른 —)
+        '–', # '–' 제거(또 다른 –)
         '"', # '"' 제거
         '\"',  # " 제거
         '\"',  # "제거(다른 ")
+        '”',  # ”제거(또 다른 ”)
         '.*(\.\s\.).*', # '. .'문장삭제
         ".*('').*", # " ''문장'' " 제거
         '.*<.*', # '<'문장제거
@@ -52,7 +54,7 @@ def modifyScripts(file_name):
         '.*(\.com).*',   # 'com' 문장제거
         '.*\?[0-9].*', #'?숫자' 문장 제거
         '.*\‐\‐.*', # '--'문장 제거
-        '.*[0-9]\.[0-9].*', # 소수점 문장제거
+        '.*\.[0-9].*', # 소수점 문장제거
         '.*\s\?.*', #' ?'문장제거
         '.*{.*', # '{'문장제거
         '.*¶.*', # '¶'문장제거
@@ -84,7 +86,7 @@ def modifyScripts(file_name):
         'oh...', 'Oh...'
     ]
 
-    remove_dot=[
+    remove_dot=[    # . 제거 패턴
         'Mr.', 'mr.',
         'Mrs.', 'mrs.',
         'Dr.', 'dr.',
@@ -145,10 +147,13 @@ def modifyScripts(file_name):
         if "." in line:  # '?.' -> '?'
             line = line.replace("?.", "?")
 
-        if "'." in line:  # "'."->"'."
+        if "'." in line:  # "'." -> "."
             line = line.replace("'.", ".")
 
-        if "  " in line:  # "\s\s"->"\s"
+        if " ." in line:  # " ." -> "."
+            line = line.replace(" .", ".")
+
+        if "  " in line:  # "\s\s" -> "\s"
             line = line.replace("  ", " ")
 
 
