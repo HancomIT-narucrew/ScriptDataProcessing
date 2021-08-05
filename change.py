@@ -185,6 +185,7 @@ def attachTag(file_name) :
         line = re.sub(pattern="'ll\tO", repl="\tO\n'll\tO", string=line)
         line = re.sub(pattern="n't\tO", repl="\tO\nn't\tO", string=line)
         line = re.sub(pattern='^\tO', repl='', string=line)
+        line= re.sub(pattern='^\s',repl='',string=line)
 
         w.write(line)
         count += 1
