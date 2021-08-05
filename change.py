@@ -126,7 +126,7 @@ def modifyScripts(file_name):
         if line.isupper() == True:  # 문장 전체 대문자 제거
             line = line.replace(line, '')
 
-        if '!' in line:  # '!' -> '.'
+         # '!' -> '.'
             line = line.replace('!', '.')
 
         if '&' in line:  # '&' -> 'and'
