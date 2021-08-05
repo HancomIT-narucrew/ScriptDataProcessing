@@ -18,6 +18,7 @@ def modifyScripts(file_name):
         '.*(Sync and).*',  # 삭제
         '.*(Sync by).*',  # 삭제
         '.*(Synced by).*',  # 삭제
+        '.*(Sync corrections ).*',# 삭제
         '.*(Original Air Date).*',  # 삭제
         ".*(D'you).*",  # 삭제
         ".*(y'know).*",  # 삭제
